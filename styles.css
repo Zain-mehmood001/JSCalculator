@@ -1,0 +1,50 @@
+body{
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+html{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightyellow;
+}
+:root{
+    --buttoncolor: lightgray;
+}
+
+#mainborder{
+    display: flex;
+    justify-content:space-between;
+    flex-direction: column;    
+    background-color: gray;
+    margin-top: 4vh;
+    width: 350px;
+    height: 530px;
+    border-radius: 15px;
+    padding: 10px;
+    
+}
+
+#display{
+    width: 350px;
+    height: 125px;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    text-align: end;
+}
+
+.number-button{
+    margin: 5px;
+    width: 70px;
+    height: 70px;
+    background-color: var(--buttoncolor);
+    border-radius: 50%;
+    border: 0;
+    
+}
+.buttonContainer{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

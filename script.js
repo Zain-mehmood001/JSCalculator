@@ -42,4 +42,55 @@ function roundCorrectly(num)
     return Math.round( (num + Number.EPSILON) * 1000) / 1000;
 }
 
+function operate()
+{
+    let a = 0;
+    let b = 0;
+    let op = '';
+    a = prompt("Enter First number");
+    op = prompt("Enter operator");
+    b = prompt("Enter second number");
 
+    if(a % 1 != 0)
+    {
+        a = parseFloat(a);
+    }
+    else{
+        a = parseInt(a);
+    }
+
+    (b % 1 != 0) ? b = parseFloat(b):b = parseInt(b);
+
+    console.log(a + " " + op + " " + b);
+    switch(op){
+        case '+':
+            console.log(add(a, b));
+            break;
+        case '-':
+            console.log(subtract(a, b));
+            break;
+        case '*':
+            console.log(multiply(a, b));
+            break;
+        case '/':
+            console.log(divide(a ,b));
+            break;
+        default:
+            alert("Invalid input");
+            break;
+    }
+
+}
+
+//operate();
+
+// DOM manipulation for buttons
+
+/*
+const BContainer = document.querySelector(".buttonContainer");
+for(let i = 0; i < 16; i++)
+{
+    const button = document.createElement('button');
+    button.classList.add('number-button');
+    BContainer.appendChild(button);
+}*/
