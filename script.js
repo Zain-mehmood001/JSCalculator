@@ -86,11 +86,3 @@ function operate()
 
 // DOM manipulation for buttons
 
-/*
-const BContainer = document.querySelector(".buttonContainer");
-for(let i = 0; i < 16; i++)
-{
-    const button = document.createElement('button');
-    button.classList.add('number-button');
-    BContainer.appendChild(button);
-}*/

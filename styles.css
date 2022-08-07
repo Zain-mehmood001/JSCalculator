@@ -13,7 +13,7 @@ html{
 
 #mainborder{
     display: flex;
-    justify-content:space-between;
+    
     flex-direction: column;    
     background-color: gray;
     margin-top: 4vh;
@@ -25,6 +25,7 @@ html{
 }
 
 #display{
+    margin-bottom: 10%;
     width: 350px;
     height: 125px;
     background-color: black;
@@ -33,7 +34,8 @@ html{
     text-align: end;
 }
 
-.number-button{
+.button{
+    padding: 0px;
     margin: 5px;
     width: 70px;
     height: 70px;
@@ -42,9 +44,35 @@ html{
     border: 0;
     
 }
+
+.section2 .button{
+    margin: 5px;
+    width: 70px;
+    height: 70px;
+    background-color: var(--buttoncolor);
+    border-radius: 50%;
+    border: 0;
+}
+
+#zero{
+    padding: 0px;
+    margin: 5px;
+    width: 155px;
+    height: 70px;
+    background-color: var(--buttoncolor);
+    border-radius: 50px;
+    border: 0;
+}
+
+.section2{
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 50% 25% 25%;
+}
+
 .buttonContainer{
-    margin-top: 15px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(4, 25%);
+    
 }
