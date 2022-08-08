@@ -82,7 +82,38 @@ function operate()
 
 }
 
+function showOnDisplay(num)
+{
+    const display = document.querySelector("#display");
+    
+    display.textContent = num;
+}
+
+function clearDisplay()
+{
+    operandOne = '0';
+    showOnDisplay(operandOne);
+    operandOne = '';
+}
 //operate();
 
 // DOM manipulation for buttons
 
+let operandOne = '';
+
+const buttons = document.querySelectorAll('#mainborder button');
+buttons.forEach(button => {
+    button.addEventListener('click', function(){
+        if(button.className === 'operand')
+        {
+            operandOne += button.textContent;   
+            showOnDisplay(operandOne); 
+        }
+        if(button.className === 'clear button')
+        {
+            
+            clearDisplay();
+        }
+
+    });
+})
