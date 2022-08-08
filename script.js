@@ -42,15 +42,8 @@ function roundCorrectly(num)
     return Math.round( (num + Number.EPSILON) * 1000) / 1000;
 }
 
-function operate()
+function operate(a, b, oper)
 {
-    let a = 0;
-    let b = 0;
-    let op = '';
-    a = prompt("Enter First number");
-    op = prompt("Enter operator");
-    b = prompt("Enter second number");
-
     if(a % 1 != 0)
     {
         a = parseFloat(a);
@@ -64,55 +57,101 @@ function operate()
     console.log(a + " " + op + " " + b);
     switch(op){
         case '+':
-            console.log(add(a, b));
+            return add(a, b);
             break;
         case '-':
-            console.log(subtract(a, b));
+            return subtract(a, b);
             break;
         case '*':
-            console.log(multiply(a, b));
+            return multiply(a, b);
             break;
         case '/':
-            console.log(divide(a ,b));
+            return divide(a ,b);
             break;
         default:
             alert("Invalid input");
             break;
     }
-
+    op = '';
 }
 
-function showOnDisplay(num)
+function showOnDisplay(numbersText)
 {
     const display = document.querySelector("#display");
-    
-    display.textContent = num;
+    display.textContent = numbersText;
 }
 
 function clearDisplay()
 {
-    operandOne = '0';
-    showOnDisplay(operandOne);
+    displayStr = '0';
+    op = '';
     operandOne = '';
+    operandTwo = '';
+    result = null;
+    showOnDisplay(displayStr);
+    // displayStr = '';
+    // secondStr = '';
 }
 //operate();
 
 // DOM manipulation for buttons
 
+let displayStr = '';
+let secondStr = '';
 let operandOne = '';
-
+let operandTwo = '';
+let result = null;
+let op = '';
 const buttons = document.querySelectorAll('#mainborder button');
 buttons.forEach(button => {
     button.addEventListener('click', function(){
-        if(button.className === 'operand')
+        if(button.className === 'operand' && op === '')
         {
-            operandOne += button.textContent;   
-            showOnDisplay(operandOne); 
+            operandOne += button.textContent;
+            showOnDisplay(operandOne);
+        }
+        else if(button.className === 'operand' && op !== '')
+        {
+            operandTwo += button.textContent;
+            showOnDisplay(operandTwo);
+        }
+        if(button.className === "operator" && result != null)
+        {
+            operandOne = result;
+            operandTwo = '';
+            op = '';
+            console.log("op1: " + operandOne);
+        }
+        if(operandOne !== '' && operandTwo !== '' && button.className === 'operator')
+        {
+            result = operate(operandOne, operandTwo, op);
+            op = button.textContent;
+            operandOne = result;
+            showOnDisplay(result);
+            result = null;
+            operandTwo = '';
+            console.log("result: " + result);
+            console.log("op1: " + operandOne);
+            console.log(op);
         }
         if(button.className === 'clear button')
         {
-            
             clearDisplay();
+        }
+        if(button.className === 'operator')
+        {
+            op = button.textContent;
+            // console.log(displayStr);
+            // displayStr = '';
+            // console.log(op);
+            // console.log("Op1: " + operandOne);
+            // console.log(typeof operandOne);
+        }
+        if(button.className === "equal operator")
+        {
+            result = operate(operandOne, operandTwo, op);
+            showOnDisplay(result);
+            console.log(result);
         }
 
     });
