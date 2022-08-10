@@ -27,6 +27,7 @@ html{
 
 #display{
     margin-bottom: 5px;
+    overflow: hidden;
     width: 335px;
     height: 125px;
     background-color: ghostwhite;
@@ -37,6 +38,22 @@ html{
     padding-right: 15px;
     text-align: right;
     font-size: 50px;
+}
+
+.operand.downpress, .operator.downpress, .decimal.button.downpress,
+.clear.button.downpress{
+    background-color: rgba(0,0,0, 0.2);
+    transform:scale(0.9)
+}
+
+
+#zero.operand.downpress{
+    background-color:  rgba(0,0,0, 0.2);
+    
+}
+
+.equal.operator.downpress{
+    background-color: rgba(0, 124, 0, 0.918);
 }
 
 .button, .operand, .operator{
@@ -75,6 +92,7 @@ html{
     justify-items: center;
     grid-template-columns: 50% 25% 25%;
 }
+
 
 .buttonContainer{
     display: grid;

@@ -104,13 +104,19 @@ buttons.forEach(button => {
     button.addEventListener('click', function(){
         if(button.className === 'operand' && op === '')
         {
-            operandOne += button.textContent;
-            showOnDisplay(operandOne);
+            if(operandOne.length <= 10)
+            {
+                operandOne += button.textContent;
+                showOnDisplay(operandOne);
+            }
         }
         else if(button.className === 'operand' && op !== '')
         {
-            operandTwo += button.textContent;
-            showOnDisplay(operandTwo);
+            if(operandTwo.length <= 10)
+            {
+                operandTwo += button.textContent;
+                showOnDisplay(operandTwo);
+            }
         }
         if(button.className === "operator" && result != null)
         {
@@ -122,9 +128,14 @@ buttons.forEach(button => {
         if(operandOne !== '' && operandTwo !== '' && button.className === 'operator')
         {
             result = roundCorrectly(operate(operandOne, operandTwo, op));
+            if(result.toString().length >= 10){
+                showOnDisplay(result.toExponential(3));
+            }
+            else{
+                showOnDisplay(result);
+            }
             op = button.textContent;
             operandOne = result;
-            showOnDisplay(result);
             result = null;
             operandTwo = '';
             console.log("result: " + result);
@@ -149,7 +160,13 @@ buttons.forEach(button => {
             if(operandOne !== '' && operandTwo !== '')
             {
                 result = roundCorrectly(operate(operandOne, operandTwo, op));
-                showOnDisplay(result);
+                if(result.toString().length >= 10)
+                {
+                    showOnDisplay(result.toExponential(2));
+                }
+                else{
+                    showOnDisplay(result);
+                }
                 console.log(result);
             }
         }
@@ -223,4 +240,21 @@ buttons.forEach(button => {
         }
     });
 
+})
+
+const buttonsStyle = document.querySelectorAll('#mainborder button');
+buttonsStyle.forEach(button => {
+    button.addEventListener('mousedown', function(){
+        button.style.transition = '0s';
+        button.classList.add('downpress');
+    })
+
+    button.addEventListener('mouseup', function(){
+        button.style.transition = '0.45s';
+        button.classList.remove('downpress');
+    })
+    button.addEventListener('mouseleave', function(){
+        button.style.transition = '0.45s';
+        button.classList.remove('downpress');
+    })
 })
