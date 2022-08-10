@@ -91,18 +91,9 @@ function clearDisplay()
 }
 //operate();
 
-// DOM manipulation for buttons
-
-let displayStr = '';
-let secondStr = '';
-let operandOne = '';
-let operandTwo = '';
-let result = null;
-let op = '';
-const buttons = document.querySelectorAll('#mainborder button');
-buttons.forEach(button => {
-    button.addEventListener('click', function(){
-        if(button.className === 'operand' && op === '')
+function calculation(button)
+{
+    if(button.className === 'operand' && op === '')
         {
             if(operandOne.length <= 10)
             {
@@ -238,8 +229,22 @@ buttons.forEach(button => {
                 showOnDisplay(operandTwo);
             }
         }
-    });
+        
+}
 
+// DOM manipulation for buttons
+
+ let displayStr = '';
+// let secondStr = '';
+let operandOne = '';
+let operandTwo = '';
+let result = null;
+let op = '';
+const buttons = document.querySelectorAll('#mainborder button');
+buttons.forEach(butt => {
+    butt.addEventListener('click', function(){
+        calculation(butt);
+    });
 })
 
 const buttonsStyle = document.querySelectorAll('#mainborder button');
@@ -258,3 +263,17 @@ buttonsStyle.forEach(button => {
         button.classList.remove('downpress');
     })
 })
+// key boards support
+window.addEventListener('keydown', function(e)
+{   
+    const button = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    calculation(button);
+    button.style.transition = '0s';
+    button.classList.add('downpress');
+});
+
+window.addEventListener('keyup', function(e){
+    const button = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    button.style.transition = '0.45s';
+    button.classList.remove('downpress');
+});
