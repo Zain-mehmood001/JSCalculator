@@ -68,9 +68,6 @@ function operate(a, b, oper)
         case '/':
             return divide(a ,b);
             break;
-        default:
-            alert("Invalid input");
-            break;
     }
     op = '';
 }
@@ -124,7 +121,7 @@ buttons.forEach(button => {
         }
         if(operandOne !== '' && operandTwo !== '' && button.className === 'operator')
         {
-            result = operate(operandOne, operandTwo, op);
+            result = roundCorrectly(operate(operandOne, operandTwo, op));
             op = button.textContent;
             operandOne = result;
             showOnDisplay(result);
@@ -149,10 +146,81 @@ buttons.forEach(button => {
         }
         if(button.className === "equal operator")
         {
-            result = operate(operandOne, operandTwo, op);
-            showOnDisplay(result);
-            console.log(result);
+            if(operandOne !== '' && operandTwo !== '')
+            {
+                result = roundCorrectly(operate(operandOne, operandTwo, op));
+                showOnDisplay(result);
+                console.log(result);
+            }
         }
-
+        if(button.className === 'decimal button' && op === '' && operandOne !== '')
+        {
+            if(!operandOne.includes('.'))
+            {
+                operandOne += button.textContent;
+                showOnDisplay(operandOne);
+            }
+        }
+        else if(button.className === 'decimal button' && op !== '' && operandTwo !== '')
+        {
+            if(!operandTwo.includes('.'))
+            {
+                operandTwo += button.textContent;
+                showOnDisplay(operandTwo);
+            }
+        }
+        if(button.className === '+- operator' && op === '')
+        {
+            if(!operandOne.toString().includes('-'))
+            {
+                operandOne = '-' + operandOne;
+                showOnDisplay(operandOne);
+            }
+            else{
+                operandOne = operandOne.toString().replace('-', '');
+                showOnDisplay(operandOne);
+            }
+        }
+        else if(button.className === '+- operator' && op !== '')
+        {
+            if(!operandTwo.includes('-'))
+            {
+                operandTwo = '-' + operandTwo;
+                showOnDisplay(operandTwo);
+            }
+            else{
+                operandTwo = operandTwo.replace('-', '');
+                showOnDisplay(operandTwo);
+            }
+        }
+        if(button.className === 'per operator' && op === '')
+        {
+            if(!operandOne.toString().includes('.'))
+            {
+                operandOne = operandOne / 100;
+                operandOne.toString();
+                showOnDisplay(operandOne);
+            }
+            else{
+                operandOne = operandOne * 100;
+                operandOne.toString();
+                showOnDisplay(operandOne);
+            }
+        }
+        else if(button.className === 'per operator' && op !== '')
+        {
+            if(!operandTwo.toString().includes('.'))
+            {
+                operandTwo = operandTwo / 100;
+                operandTwo.toString();
+                showOnDisplay(operandTwo);
+            }
+            else{
+                operandTwo = operandTwo * 100;
+                operandTwo.toString();
+                showOnDisplay(operandTwo);
+            }
+        }
     });
+
 })
